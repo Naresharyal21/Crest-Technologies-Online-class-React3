@@ -2,3 +2,142 @@
   margin: 0px;
   padding: 0px;
 }
+.app-container.light {
+  transition: background-color 0.51s ease, color 0.51s ease;
+  background-color: rgb(122, 117, 117);
+  color: rgb(29, 56, 93);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.app-container.dark {
+  transition: background-color 0.51s ease, color 0.51s ease;
+  background-color: #1e0a2e;
+  color: rgb(82, 118, 170);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+button {
+  background-color: #008cba;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #005f73;
+}
+.task-list-container {
+  padding: 20px;
+}
+
+.task-list-title {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.task-cards {
+  display: flex;
+  
+
+  gap: 26px;
+  flex-wrap: wrap;
+  
+}
+
+.task-card {
+ 
+  color: var(--text-color, #000);
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 16px;
+  width: 300px;
+  transition: all 0.3s ease;
+  
+}
+
+.task-card:hover {
+  transform: translateY(-15px);
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-actions button {
+  margin-left: 8px;
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.25rem;
+  color: inherit;
+}
+
+.btn-icon:hover {
+  color: #007bff;
+}
+
+.no-tasks {
+  padding: 20px;
+  text-align: center;
+  font-style: italic;
+}
+.bxhw{
+  border: 1px solid black;
+ padding:20px;
+  width: 50%;
+  height:40%;
+  margin-left: 300px;
+  margin-top: 100px;
+  border-radius: 10px;
+  
+}
+.sw{
+  width: 90%;
+height: 30px;
+padding-left: 5px;
+}
+.mr-11{
+  margin-top: 11px;
+ 
+}
+.flex {
+  display: flex;
+}
+
+.py-15 {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-left: auto;
+}
+.searchicon {
+  position: relative;
+  width: 300px;
+}
+.searchicon .inner {
+  position: absolute;
+  left: 9px;
+  top: 50%;
+  transform: translateY(-36%);
+  color: #9aa0a6;
+  font-size: 20px;
+}
+.searchicon input.input {
+  padding: 10px 10px 10px 40px;
+  width: 100%;
+  border: 1px solid #dfe1e5;
+  border-radius: 24px;
+  
+  font-size: 16px;
+  outline: none;
+  
+}

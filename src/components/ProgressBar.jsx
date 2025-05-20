@@ -1,9 +1,9 @@
 import React from 'react';
 
-const ProgressBar = ({ completedStep, totalSteps }) => {
-  if (!totalSteps || totalSteps <= 0) return null;
+const ProgressBar = ({ completedStep, totalStep }) => {
+  if (!totalStep || totalStep <= 0) return null;
 
-  const percentage = ((completedStep / totalSteps) * 100);
+  const percentage = ((completedStep / totalStep) * 100);
 
 
    let barColor = 'red'; 

@@ -1,92 +1,88 @@
 import React, { useState } from "react";
 
-const TaskForm = ({ onTaskAdded }) => {
-    const [taskName, settaskname] = useState('');
-    const [description, setdescription] = useState('');
-    const [totalstep, settotalstep] = useState('');
-    const [error, seterror] = useState({});
+const TaskForm = ({ onAddTask, onCancel }) => {
+  const [taskName, setTaskName] = useState('');
+  const [description, setDescription] = useState('');
+  const [totalStep, setTotalStep] = useState('');
+  const [error, setError] = useState({});
 
-    const validate = () => {
-        const error = {};
-        if (taskName.trim() === '') {
-            error['taskName'] = "Task Name is Required";
-        }
-        if (description.trim() === '') {
-            error['description'] = "Description is Required";
-        }
-        if (totalstep.trim() === '') {
-            error['totalstep'] = "Total Steps is Required";
-        } else if (isNaN(totalstep) || Number(totalstep) <= 0) {
-            error['totalstep'] = "Total Steps must be a positive number";
-        }
+  const validate = () => {
+    const error = {};
+    if (taskName.trim() === '') {
+      error.taskName = "Task Name is Required";
+    }
+    if (description.trim() === '') {
+      error.description = "Description is Required";
+    }
+    if (totalStep.trim() === '') {
+      error.totalStep = "Total Steps is Required";
+    } else if (isNaN(totalStep) || Number(totalStep) <= 0) {
+      error.totalStep = "Total Steps must be a positive number";
+    }
+    setError(error);
+    return Object.keys(error).length === 0;
+  };
 
-        seterror(error);
-        return Object.keys(error).length === 0;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!validate()) return;
+
+    const newTask = {
+      id: Date.now(),
+      taskName,
+      description,
+      totalStep: Number(totalStep),
+      currentstep: 0,
     };
 
-    const handlesubmit = (e) => {
-        e.preventDefault();
-        if (!validate()) return;
+    onAddTask(newTask);
 
-        const mytasks = JSON.parse(localStorage.getItem('myTasks')) || [];
-        mytasks.push({
-            id: Date.now(),
-            taskName,
-            description,
-            totalstep,
-            currentstep: '3',
-        });
-        localStorage.setItem('myTasks', JSON.stringify(mytasks));
-        settaskname('');
-        setdescription('');
-        settotalstep('');
+    // Clear form
+    setTaskName('');
+    setDescription('');
+    setTotalStep('');
+  };
 
-        if (onTaskAdded) onTaskAdded();
-    };
+  return (
+    <form className="bxhw" onSubmit={handleSubmit}>
 
-    return (
-        <>
-            <form onSubmit={handlesubmit}>
-                <input
-                    type="text"
-                    name="TaskName"
-                    value={taskName}
-                    onChange={(e) => {
-                        settaskname(e.target.value);
-                        if (error.taskName) seterror({ ...error, taskName: '' });
-                    }}
-                    placeholder="Enter Task Name"
-                />
-                <p>{error.taskName}</p>
+      <input className='mr-11 sw'
+        type="text"
+        placeholder="Enter Task Name"
+        value={taskName}
+        onChange={(e) => {
+          setTaskName(e.target.value);
+          if (error.taskName) setError({ ...error, taskName: '' });
+        }}
+      />
+      <p>{error.taskName}</p>
 
-                <input
-                    type="text"
-                    name="Description"
-                    value={description}
-                    onChange={(e) => {
-                        setdescription(e.target.value);
-                        if (error.description) seterror({ ...error, description: '' });
-                    }}
-                    placeholder="Enter Description On Task"
-                />
-                <p>{error.description}</p>
+      <input className='mr-11 sw'
+        type="text"
+        placeholder="Enter Description"
+        value={description}
+        onChange={(e) => {
+          setDescription(e.target.value);
+          if (error.description) setError({ ...error, description: '' });
+        }}
+      />
+      <p>{error.description}</p>
 
-                <input
-                    type="number"
-                    name="totalsteps"
-                    value={totalstep}
-                    onChange={(e) => {
-                        settotalstep(e.target.value);
-                        if (error.totalstep) seterror({ ...error, totalstep: '' });
-                    }}
-                    placeholder="Enter Total Steps"
-                />
-                <p>{error.totalstep}</p>
+      <input  className='mr-11 sw'
+        type="number"
+        placeholder="Enter Total Steps"
+        value={totalStep}
+        onChange={(e) => {
+          setTotalStep(e.target.value);
+          if (error.totalStep) setError({ ...error, totalStep: '' });
+        }}
+      />
+      <p>{error.totalStep}</p>
 
-                <button type="submit">Add My Task</button>
-            </form>
-        </>
-    );
+      <button className='mr-11 sw'  type="submit">Add My Task</button>
+      <button className='mr-11 sw'  type="button" onClick={onCancel}>Cancel</button>
+    </form>
+  ); 
 };
 
 export default TaskForm;
